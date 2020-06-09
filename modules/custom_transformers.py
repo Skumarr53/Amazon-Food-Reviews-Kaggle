@@ -18,6 +18,7 @@ from sklearn.metrics import r2_score, accuracy_score
 from sklearn.tree import DecisionTreeRegressor
 from collections import defaultdict
 from sklearn.decomposition import PCA
+from scipy.sparse import coo_matrix, hstack
 from pdb import set_trace
         
 
@@ -356,6 +357,20 @@ class AddConstantTransformer(BaseEstimator, TransformerMixin):
         Xc = X + self.c
         return Xc
 
+class MulptiplyConstantTransformer(BaseEstimator, TransformerMixin):
+    
+    def __init__(self, c=3):
+        self.c = c
+
+    def fit(self, X, y=None):
+        # stateless transformer
+        return self
+
+    def transform(self, X):
+        # assumes X is a DataFrame
+        Xc = X * self.c
+        return Xc
+
 
 class ShiftTranformer(BaseEstimator, TransformerMixin):
     
@@ -590,4 +605,15 @@ class DF_OneHotEncoder(BaseEstimator, TransformerMixin):
         if self.filter_threshold is not None: X = X[self.onehot_cols]
         return X
 
-#class DF_LabelEncoder(BaseEstimator, TransformerMixin):
+class DF_WeightFeature(BaseEstimator, TransformerMixin):
+
+    def __init__(self,weight = None):
+        self.weight = weight
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X = hstack([X]*3)
+        return X
+
