@@ -46,10 +46,6 @@ BOW | Logistic Regression | L2 | 0.97 | 0.919
 **TFIDF** | **Logistic Regression** | **L2** | **0.982** | **0.932**
 AVG W2V | Logistic Regression | L2 | 0.931 | 0.859
 TFIDF Weighted W2V | Logistic Regression | L2 | 0.921 | 0.849
-BOW | Logistic Regression | L1 |  | 
-TFIDF | Logistic Regression | L1 |  | 
-AVG W2V | Logistic Regression | L1 |  | 
-TFIDF Weighted W2V | Logistic Regression | L1 |  | 
 BOW | SVM (Calibrated) | Linear | 0.972 | 0.92
 TFIDF | SVM (Calibrated) | Linear | 0.975 | 0.925
 AVG W2V | SVM (Calibrated) | Linear | 0.919 | 0.849
@@ -62,7 +58,6 @@ BOW | Decision Tree | - | 0.835 | 0.786
 TFIDF | Decision Tree | - | 0.827 | 0.782
 AVG W2V | Decision Tree | - | 0.865 | 0.791
 TFIDF Weighted W2V | Decision Tree | - | 0.848 | 0.775
-BOW | Random Forest | - |  | 
 TFIDF | Random Forest | - | 0.949 | 0.88
 AVG W2V | Random Forest | - | 0.921 | 0.845
 TFIDF Weighted W2V | Random Forest | - | 0.913 | 0.836
