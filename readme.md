@@ -114,3 +114,8 @@ param_grid = {'features__Summary_vectorizer__vectorize__binary' : [True, False],
 ### Validation plot
 
 ![](BestModel_results.png)
+
+
+### Feature importance plot
+
+![](feature_importances.png)
