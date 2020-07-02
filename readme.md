@@ -1,5 +1,30 @@
 # Amazon Fine Food Reviews
 
+- [Amazon Fine Food Reviews](#amazon-fine-food-reviews)
+  - [Objective:](#objective)
+  - [Dataset Description](#dataset-description)
+  - [key technical aspects](#key-technical-aspects)
+  - [Model Selection](#model-selection)
+    - [Metric](#metric)
+    - [Validation Results](#validation-results)
+  - [Best model](#best-model)
+    - [Featurization and Model Pipeline](#featurization-and-model-pipeline)
+    - [HyperParmaeter Search space](#hyperparmaeter-search-space)
+    - [Best HyperParmaeters](#best-hyperparmaeters)
+    - [Validation plot](#validation-plot)
+    - [Feature importance plot](#feature-importance-plot)
+  - [Technologies Used](#technologies-used)
+
+## Objective:
+
+Amazon E-commmerce also has variety food products. Like any other E-commerces Amazon wants to make more bussiness by providing better services to its customers. One of them is recommending good products. In order to decide which products are good we can look at customer reviews who have already purchased them. This project focuses on building a classifer that predicts whether reviews are positive are negative for making informed decision.
+
+In order to train a classifier to detect whether the review is positive or negative we need to have a label column. In the given set such info not available but, fortunately, we got a column of scores/rating which is close approximation of user liked or not liked the product. Scores less than 3 (Rating 2 or 1) we are pretty sure that label is negative and for more than 3 (Rating 3 or 4) it's positive. But, we are sure about examples with score 3 (kind of neutral). so we drop those rows.
+
+## Dataset Description
+
+source: https://www.kaggle.com/snap/amazon-fine-food-reviews
+
 **Data includes**:
 
 * Reviews from Oct 1999 - Oct 2012
@@ -9,10 +34,10 @@
 * 260 users with > 50 reviews
 
 **Columns**
-* Id
+* Id - unique row identifier
 * ProductId - unique identifier for the product
 * UserId - unqiue identifier for the user
-* ProfileName
+* ProfileName - Name of user
 * HelpfulnessNumerator - number of users who found the review helpful
 * HelpfulnessDenominator - number of users who indicated whether they found the review helpful or not
 * Score - rating between 1 and 5
@@ -20,17 +45,30 @@
 * Summary - brief summary of the review
 * Text - text of the review
 
-**Objective**: In order to train a classifier to detect whether the review is positive or negative we need to have a label column. In the given set such info not available but, fortunately, we got a column of scores/rating which is close approximation of user liked or not liked the product. Scores less than 3 (Rating 2 or 1) we are pretty that label is negative and for more than 3 (Rating 3 or 4) it's positive. But, we are sure about examples with score 3 (kind of neutral). so we drop those rows.
-
-## Feature tranformation:
-summary = 'count_letters', 'count_word', 'count_unique_word'
 
 
+## key technical aspects
+After data exploration and visualization various data prepossing steps are selected after of data. Following are noticeable ones among them.
+
+- Basic features like charecter count, word count etc extracted from review text added.
+  
+- BOW, TFIDF, Word2Vec, Average Word2Vec, Tfidf weighted word2vec featurization tecniques are tried on both ```summary``` and ```Review``` text.
+
+- As data is highly imbalanced, data was downsampled. For training, 10000 samples were drawn from both classes.
+   
+- Trained various models like KNN, Naive Bayes, Logistic Regressin, Decision Tree XGBoost with hyperparameter tuning to select best model. **Logistic Regression** turns out be best model with highest AUROC of **0.982** with  and **93%** accuracy.
 
 
-## Validation Results
 
-Vectorizer | Model  | Type | Best AUC | Accuracy
+## Model Selection
+
+### Metric
+
+* AUROC (Area Under the Receiver Operating Characteristic curve) is used as metric. It combines both **True positive rate** (TPR) and **False positive rate** (FPR) into one single metric and balances both.
+
+### Validation Results
+
+Vectorizer | Model  | Type | Best AUROC | Accuracy
 -----------|--------|------|----------|---------
 BOW | KNN | brute | 0.772 | -
 TFIDF | KNN | brute | 0.895 | -
@@ -65,7 +103,7 @@ BOW | GBDT |  | 0.964 | 0.9
 
 ## Best model 
 
-### Featurization Pipeline
+### Featurization and Model Pipeline
 ``` python
 clf = Pipeline([
     ('features',FeatureUnion([
@@ -119,3 +157,12 @@ param_grid = {'features__Summary_vectorizer__vectorize__binary' : [True, False],
 ### Feature importance plot
 
 ![](feature_importances.png)
+
+## Technologies Used
+
+![](https://forthebadge.com/images/badges/made-with-python.svg)
+
+[<img target="_blank" src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" width=202>](https://scikit-learn.org/stable/#)
+[<img target="_blank" src="https://www.meccanismocomplesso.org/wp-content/uploads/2020/03/NLTK-Native-Language-Tool-Kit-la-libreria-Python-per-il-Language-Processing-and-Analysis.jpg" width=202>](https://www.nltk.org/)
+[<img target="_blank" src="https://miro.medium.com/max/1400/0*s3uZLuAD-b0NBV2l" width=202>](https://radimrehurek.com/gensim/models/word2vec.html)
+[<img target="_blank" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/SQLite370.svg/330px-SQLite370.svg.png" width=202>](https://www.sqlite.org/)
