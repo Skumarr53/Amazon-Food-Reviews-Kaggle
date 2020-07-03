@@ -14,6 +14,7 @@
     - [Validation plot](#validation-plot)
     - [Feature importance plot](#feature-importance-plot)
   - [Technologies Used](#technologies-used)
+  - [Creator:](#creator)
 
 ## Objective:
 
@@ -166,3 +167,9 @@ param_grid = {'features__Summary_vectorizer__vectorize__binary' : [True, False],
 [<img target="_blank" src="https://www.meccanismocomplesso.org/wp-content/uploads/2020/03/NLTK-Native-Language-Tool-Kit-la-libreria-Python-per-il-Language-Processing-and-Analysis.jpg" width=202>](https://www.nltk.org/)
 [<img target="_blank" src="https://miro.medium.com/max/1400/0*s3uZLuAD-b0NBV2l" width=202>](https://radimrehurek.com/gensim/models/word2vec.html)
 [<img target="_blank" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/SQLite370.svg/330px-SQLite370.svg.png" width=202>](https://www.sqlite.org/)
+
+</br>
+
+------
+## Creator:
+[<img target="_blank" src="https://media-exp1.licdn.com/dms/image/C4D03AQG-6F3HHlCTVw/profile-displayphoto-shrink_200_200/0?e=1599091200&v=beta&t=WcZLox9lzVQqIDJ2-5DsEhNFvEE1zrZcvkmcepJ9QH8" width=150>](https://skumar-djangoblog.herokuapp.com/)
